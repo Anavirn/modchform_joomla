@@ -29,20 +29,20 @@ $input_lm         = $params->get('input_lm');
 
 $job_soins        = modchform::getJobsSoins(); 
 $job_social       = modchform::getJobsSocial();
-// $job_ingen        = modchform::getJobsIngen();
-// $job_logis        = modchform::getJobsLogis();
-// $job_qual         = modchform::getJobsQual();
-// $job_sys          = modchform::getJobsSys();
-// $job_gest         = modchform::getJobsGest();
-// $job_manag        = modchform::getJobsManag();
-// $job_medic        = modchform::getJobsMedic();
+$job_ingen        = modchform::getJobsIngen();
+$job_logis        = modchform::getJobsLogis();
+$job_qual         = modchform::getJobsQual();
+$job_sys          = modchform::getJobsSys();
+$job_gest         = modchform::getJobsGest();
+$job_manag        = modchform::getJobsManag();
+$job_medic        = modchform::getJobsMedic();
 
 
 ?>
 
 
 
- <form method="post" action="">
+ <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
     <fieldset>
     <legend><h1>Informations personnelles</h1></legend>
 
@@ -92,18 +92,45 @@ $job_social       = modchform::getJobsSocial();
         <legend><h1>Informations professionnelles</h1></legend>
 
     <label for="job"><h3><?php echo $input_job; ?></h3></label>
-    <select name="job1">
+    <select name="job1" required>
 
     	<option selected disabled>...</option>
 
-        <option disabled>- SOINS (Famille métier 05) -</option>
+        <option disabled>- SOINS -</option>
         <?php foreach ($job_soins as $j){ ?>
         <option value="<?php echo $j->soins; ?>"><?php echo $j->soins;} ?></option>
 
-        <option disabled>- SOCIAL, EDUCATIF, PSYCHOLOGIE ET CULTUREL (Famille métier 10) -</option>
+        <option disabled>- SOCIAL, EDUCATIF, PSYCHOLOGIE ET CULTUREL -</option>
          <?php foreach ($job_social as $j){ ?>
-        <option value="<?php echo $j->soins; ?>"><?php echo $j->social;} ?></option>
+        <option value="<?php echo $j->social; ?>"><?php echo $j->social;} ?></option>
+
+        <option disabled>- INGENIERIE ET MAINTENANCE TECHNIQUE -</option>
+         <?php foreach ($job_ingen as $j){ ?>
+        <option value="<?php echo $j->ingen; ?>"><?php echo $j->ingen;} ?></option>
+
+        <option disabled>- ACHAT LOGISTIQUE -</option>
+         <?php foreach ($job_logis as $j){ ?>
+        <option value="<?php echo $j->logis; ?>"><?php echo $j->logis;} ?></option>
+
+        <option disabled>- QUALITE, HYGIENE, SECURITE, ENVIRONNEMENT -</option>
+         <?php foreach ($job_qual as $j){ ?>
+        <option value="<?php echo $j->qual; ?>"><?php echo $j->qual;} ?></option>
         
+        <option disabled>- SYSTEMES D'INFORMATION -</option>
+         <?php foreach ($job_sys as $j){ ?>
+        <option value="<?php echo $j->sys; ?>"><?php echo $j->sys;} ?></option>
+
+        <option disabled>- GESTION DE L'INFORMATION -</option>
+         <?php foreach ($job_gest as $j){ ?>
+        <option value="<?php echo $j->gest; ?>"><?php echo $j->gest;} ?></option>
+
+        <option disabled>- MANAGEMENT, GESTION ET AIDE A LA DECISION -</option>
+         <?php foreach ($job_manag as $j){ ?>
+        <option value="<?php echo $j->manag; ?>"><?php echo $j->manag;} ?></option>
+
+        <option disabled>- MEDECINS -</option>
+         <?php foreach ($job_medic as $j){ ?>
+        <option value="<?php echo $j->medic; ?>"><?php echo $j->medic;} ?></option>
      
     </select>
 
@@ -114,28 +141,103 @@ $job_social       = modchform::getJobsSocial();
 
 
     <select name="job2">
-        <option selected>...</option>
+        <option selected value="">...</option>
+
+        <option disabled>- SOINS -</option>
+        <?php foreach ($job_soins as $j){ ?>
+        <option value="<?php echo $j->soins; ?>"><?php echo $j->soins;} ?></option>
+
+        <option disabled>- SOCIAL, EDUCATIF, PSYCHOLOGIE ET CULTUREL -</option>
+         <?php foreach ($job_social as $j){ ?>
+        <option value="<?php echo $j->social; ?>"><?php echo $j->social;} ?></option>
+
+        <option disabled>- INGENIERIE ET MAINTENANCE TECHNIQUE -</option>
+         <?php foreach ($job_ingen as $j){ ?>
+        <option value="<?php echo $j->ingen; ?>"><?php echo $j->ingen;} ?></option>
+
+        <option disabled>- ACHAT LOGISTIQUE -</option>
+         <?php foreach ($job_logis as $j){ ?>
+        <option value="<?php echo $j->logis; ?>"><?php echo $j->logis;} ?></option>
+
+        <option disabled>- QUALITE, HYGIENE, SECURITE, ENVIRONNEMENT -</option>
+         <?php foreach ($job_qual as $j){ ?>
+        <option value="<?php echo $j->qual; ?>"><?php echo $j->qual;} ?></option>
+        
+        <option disabled>- SYSTEMES D'INFORMATION -</option>
+         <?php foreach ($job_sys as $j){ ?>
+        <option value="<?php echo $j->sys; ?>"><?php echo $j->sys;} ?></option>
+
+        <option disabled>- GESTION DE L'INFORMATION -</option>
+         <?php foreach ($job_gest as $j){ ?>
+        <option value="<?php echo $j->gest; ?>"><?php echo $j->gest;} ?></option>
+
+        <option disabled>- MANAGEMENT, GESTION ET AIDE A LA DECISION -</option>
+         <?php foreach ($job_manag as $j){ ?>
+        <option value="<?php echo $j->manag; ?>"><?php echo $j->manag;} ?></option>
+
+        <option disabled>- MEDECINS -</option>
+         <?php foreach ($job_medic as $j){ ?>
+        <option value="<?php echo $j->medic; ?>"><?php echo $j->medic;} ?></option>
 
     	 
     </select>
     <select name="job3">
-        <option selected>...</option>
+        <option selected value="">...</option>
+
+        <option disabled>- SOINS -</option>
+        <?php foreach ($job_soins as $j){ ?>
+        <option value="<?php echo $j->soins; ?>"><?php echo $j->soins;} ?></option>
+
+        <option disabled>- SOCIAL, EDUCATIF, PSYCHOLOGIE ET CULTUREL -</option>
+         <?php foreach ($job_social as $j){ ?>
+        <option value="<?php echo $j->social; ?>"><?php echo $j->social;} ?></option>
+
+        <option disabled>- INGENIERIE ET MAINTENANCE TECHNIQUE -</option>
+         <?php foreach ($job_ingen as $j){ ?>
+        <option value="<?php echo $j->ingen; ?>"><?php echo $j->ingen;} ?></option>
+
+        <option disabled>- ACHAT LOGISTIQUE -</option>
+         <?php foreach ($job_logis as $j){ ?>
+        <option value="<?php echo $j->logis; ?>"><?php echo $j->logis;} ?></option>
+
+        <option disabled>- QUALITE, HYGIENE, SECURITE, ENVIRONNEMENT -</option>
+         <?php foreach ($job_qual as $j){ ?>
+        <option value="<?php echo $j->qual; ?>"><?php echo $j->qual;} ?></option>
+        
+        <option disabled>- SYSTEMES D'INFORMATION -</option>
+         <?php foreach ($job_sys as $j){ ?>
+        <option value="<?php echo $j->sys; ?>"><?php echo $j->sys;} ?></option>
+
+        <option disabled>- GESTION DE L'INFORMATION -</option>
+         <?php foreach ($job_gest as $j){ ?>
+        <option value="<?php echo $j->gest; ?>"><?php echo $j->gest;} ?></option>
+
+        <option disabled>- MANAGEMENT, GESTION ET AIDE A LA DECISION -</option>
+         <?php foreach ($job_manag as $j){ ?>
+        <option value="<?php echo $j->manag; ?>"><?php echo $j->manag;} ?></option>
+
+        <option disabled>- MEDECINS -</option>
+         <?php foreach ($job_medic as $j){ ?>
+        <option value="<?php echo $j->medic; ?>"><?php echo $j->medic;} ?></option>
 
     	 
     </select>
 
     <label for="emp"><h3><?php echo $input_emp; ?></h3></label>
-    <input type="radio" name="emp1">Emploi
+    <input type="checkbox" name="emp1" value="Emploi">Emploi
     <br>
-    <input type="radio" name="emp2">Contrat d'apprentissage
+    <input type="checkbox" name="emp2" value="Contrat d'apprentissage">Contrat d'apprentissage
     <br>
-    <input type="radio" name="emp3">Contrat de professionnalisation (dispositif non applicable)
+    <input type="checkbox" name="emp3" value="Contrat de professionnalisation ">Contrat de professionnalisation (dispositif non applicable)
     <br>
-    <input type="radio" name="emp4">Mobilité fonction publique (mutation ou détachement)
+    <input type="checkbox" name="emp4" value="Mobilité fonction publique">Mobilité fonction publique (mutation ou détachement)
     <br>
-    <input type="radio" name="emp5">Candidature ciblée sur une offre, préciser le titre de l’offre
+    <input type="checkbox" name="emp5" value="Candidature ciblée sur une offre, préciser le titre de l’offre">Candidature ciblée sur une offre, préciser le titre de l’offre
     <br>
-    <input type="radio" name="emp6">Autre
+    <input type="checkbox" name="emp6" value="Autre">Autre
+
+    <label for="sal"><h3><?php echo $input_sal; ?></h3></label>
+    <input type="text" name="sal" class="form-control" required>
     
     <label for="motiv"><h3><?php echo $input_motiv; ?></h3></label>
     <textarea class="form-control" name="motiv" required></textarea>
@@ -162,13 +264,49 @@ $job_social       = modchform::getJobsSocial();
 <script type="text/javascript">
     jQuery(document).ready(function(){
 
+
+    //Postal code check
+    jQuery("input[name='cp']").blur(function()
+    {
+        var $charcp = /^([0-9]{5})$/;
+
+        if (jQuery("input[name='cp']").val() === "")
+        {
+            jQuery(this).css({backgroundColor : "#ffffff"});
+            jQuery("small").empty("");
+        }
+
+        else
+        {
+            if ($charcp.test(jQuery(this).val()))
+            {
+                jQuery(this).css({backgroundColor : "#f8ffd7"});
+                jQuery("small").empty("");
+            }
+            else
+            {
+                jQuery("small").empty("");
+                jQuery(this).css({backgroundColor : "#ffcccb"});
+                jQuery(this).after("<small class='small_err'>  Veuillez renseigner un code postal valide</small>");
+                jQuery(".small_err").css({color : "red"});
+            } 
+        }
+
+
+    });
+
+
+
+
     //Name check
     jQuery("input[name='email']").blur(function() 
     {
         var $charm = /^[a-z0-9]+([-_.]?[a-z0-9]+)*@[a-z0-9]+([-_.]?[a-z0-9]+)*\.[a-z]{2,3}$/;
+
         if (jQuery("input[name='email']").val() === "")
         {
             jQuery(this).css({backgroundColor : "#ffffff"});
+            jQuery("small").empty("");
         }
 
         else
@@ -176,10 +314,14 @@ $job_social       = modchform::getJobsSocial();
             if ($charm.test(jQuery(this).val())) 
             {
                 jQuery(this).css({backgroundColor : "#f8ffd7"});
+                jQuery("small").empty("");
             }
             else
             {
+                jQuery("small").empty("");
                 jQuery(this).css({backgroundColor : "#ffcccb"});
+                jQuery(this).after("<small class='small_err'>  Veuillez renseigner une addresse mail valide</small>");
+                jQuery(".small_err").css({color : "red"});
             } 
         }
         
@@ -194,6 +336,7 @@ $job_social       = modchform::getJobsSocial();
         if (jQuery("input[name='phone']").val() === "")
         {
             jQuery(this).css({backgroundColor : "#ffffff"});
+            jQuery("small").empty("");
         }
 
         else
@@ -201,10 +344,14 @@ $job_social       = modchform::getJobsSocial();
             if ($chart.test(jQuery(this).val())) 
             {
                 jQuery(this).css({backgroundColor : "#f8ffd7"});
+                jQuery("small").empty("");
             }
             else
             {
+                jQuery("small").empty("");
                 jQuery(this).css({backgroundColor : "#ffcccb"});
+                jQuery(this).after("<small class='small_err'>  Veuillez renseigner un numéro de téléphone valide</small>");
+                jQuery(".small_err").css({color : "red"});
             } 
         }
 
@@ -216,9 +363,10 @@ $job_social       = modchform::getJobsSocial();
 
         var $chartp = /^0[1-68]([-/.\s]?[0-9]{2}){4}$/;
 
-        if (jQuery("input[name='phone']").val() === "")
+        if (jQuery("input[name='p_phone']").val() === "")
         {
             jQuery(this).css({backgroundColor : "#ffffff"});
+            jQuery("small").empty("");
         }
 
         else
@@ -226,10 +374,15 @@ $job_social       = modchform::getJobsSocial();
             if ($chartp.test(jQuery(this).val())) 
             {
                 jQuery(this).css({backgroundColor : "#f8ffd7"});
+                jQuery("small").empty("");
+
             }
             else
             {
+                jQuery("small").empty("");
                 jQuery(this).css({backgroundColor : "#ffcccb"});
+                jQuery(this).after("<small class='small_err'>  Veuillez renseigner un numéro de téléphone valide</small>");
+                jQuery(".small_err").css({color : "red"});
             } 
         }
 
@@ -239,8 +392,21 @@ $job_social       = modchform::getJobsSocial();
 
 
 
+
+
 });
 </script>
+
+<?php
+
+    if (isset($POST['send'])) 
+    {
+        echo "ok";
+    }
+
+
+
+?>
 
 
 
