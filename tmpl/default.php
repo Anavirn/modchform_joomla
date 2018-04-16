@@ -9,7 +9,6 @@ JHtml::_('bootstrap.tooltip');
 JHtml::stylesheet(JURI::root().'assets/bootstrap/dist/css/bootstrap.min.css');
 JHtml::stylesheet(JURI::root().'assets/bootstrap/dist/js/bootstrap.min.js');
 
-$idmodule    	  = $module->id;
 $input_name       = $params->get('input_name');
 $input_forname    = $params->get('input_forname');
 $input_adr        = $params->get('input_adr');
@@ -27,6 +26,9 @@ $input_com        = $params->get('input_com');
 $input_cv         = $params->get('input_cv');
 $input_lm         = $params->get('input_lm');
 
+$input_sender     = $params->get('input_sender');
+$input_subject    = $params->get('input_subject');
+
 $job_soins        = modchform::getJobsSoins(); 
 $job_social       = modchform::getJobsSocial();
 $job_ingen        = modchform::getJobsIngen();
@@ -40,32 +42,97 @@ $job_medic        = modchform::getJobsMedic();
 
 ?>
 
+<?php
+
+if(isset($_POST['send']))
+{
+
+// Recuperations des inputs
+    $nom                = $_POST['name'];
+    $prenom             = $_POST['forname'];
+    $adresse            = $_POST['adr'];
+    $ville              = $_POST['city'];
+    $code_postal        = $_POST['cp'];
+    $telephone          = $_POST['phone'];
+    $telephone_portable = $_POST['p_phone'];
+    $adresse_mail       = $_POST['email'];
+
+    $job_selected1      = $_POST['job1'];
+    $job_selected2      = $_POST['job2'];
+    $job_selected3      = $_POST['job3'];
+
+    $type_emploi_tab    = array($_POST['emp1'], $_POST['emp2'], $_POST['emp3'], $_POST['emp4'], $_POST['emp5'], $_POST['emp6']);
+
+    $type_emploi        = implode(', ', $type_emploi_tab);
+ 
+  
+
+    $pretention_sal     = $_POST['sal'];
+
+    $motivations        = $_POST['motiv'];
+    $commentaires       = $_POST['com'];
 
 
- <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+// Mise en forme du mail
+    $body = "<html><body><h2>Informations personelles</h2><br>Nom : ".$nom."<br>Prénom : ".$prenom."<br>Adresse postale : ".$adresse."<br>Ville : ".$ville."<br>Code postale : ".$code_postal."<br>Téléphone : ".$telephone."<br>Téléphone portable : ".$telephone_portable."<br>E-mail : ".$adresse_mail."<br><br><h2>Informations professionnelles</h2><br>Emploi(s) désiré(s) : ".$job_selected1." , ".$job_selected2." , ".$job_selected3."<br>Type d'emploi : ".$type_emploi."<br>Prétention salariale : ".$pretention_sal."<br>Motivations : ".$motivations."<br>Commentaires : ".$commentaires."</body></html>";
+
+
+// Preparation du mail
+    $mailer = JFactory::getMailer();
+
+    $config = JFactory::getConfig();
+    $sender = array( 
+        $config->get( 'mailfrom' ),
+        $config->get( 'fromname' ) 
+    );
+
+    $mailer->setSender($sender);
+
+    $user = JFactory::getUser();
+   
+
+    $mailer->addRecipient($input_sender);
+
+    
+    $mailer->setSubject($input_subject);
+    $mailer->setBody($body);
+    
+    // $mailer->addAttachment(JPATH_COMPONENT.'/assets/document.pdf');
+    $mailer->isHTML(true);
+
+// Envoi du mail
+    $send = $mailer->Send();
+    if ( $send !== true ) 
+    {
+        echo 'Erreur : ';
+    }
+    else 
+    {
+        echo 'Votre requête à bien été envoyée';
+    }
+
+
+}
+
+
+
+?>
+
+
+
+ <form method="post" action="">
     <fieldset>
     <legend><h1>Informations personnelles</h1></legend>
 
-     <div class="form-group">
 
       
-        <div class="col">
-            <label for="name"><h3><?php echo $input_name; ?></h3></label>
-            <input class="form-control" type="text" name="name" required />
-        </div>
-
-        <div class="col">
-            <label for="forname"><h3><?php echo $input_forname; ?></h3></label>
-            <input class="form-control" type="text" name="forname" required />
-        </div>
-
-     
-
-     </div>
-
-
-
-
+   
+        <label for="name"><h3><?php echo $input_name; ?></h3></label>
+        <input class="form-control" type="text" name="name" required />
+ 
+        <label for="forname"><h3><?php echo $input_forname; ?></h3></label>
+        <input class="form-control" type="text" name="forname" required />
+    
         <label for="adr"><h3><?php echo $input_adr; ?></h3></label>
         <input class="form-control" type="text" name="adr" required />
 
@@ -223,6 +290,8 @@ $job_medic        = modchform::getJobsMedic();
     	 
     </select>
 
+
+    <!-- ! COMMENT REQUIRE UN GROUPE DE CHECKBOXES ! -->
     <label for="emp"><h3><?php echo $input_emp; ?></h3></label>
     <input type="checkbox" name="emp1" value="Emploi">Emploi
     <br>
@@ -252,6 +321,8 @@ $job_medic        = modchform::getJobsMedic();
     <input type="file" name="lm" required>
 
 
+    <br>
+    <div class="g-recaptcha" data-sitekey="6LdAclMUAAAAAK5wSSEMcn2pzPwheUUMcM1NYAcX"></div>
     <br>
 
     
@@ -397,16 +468,36 @@ $job_medic        = modchform::getJobsMedic();
 });
 </script>
 
-<?php
+<!-- <?php
+    // ! RECAPTCHA EN LOCAL !
+    // // Ma clé privée
+    // $secret = "6LdAclMUAAAAALqFtMpOXB0izGQfbSjS4gJnTREw";
 
-    if (isset($POST['send'])) 
-    {
-        echo "ok";
-    }
+    // // Paramètre renvoyé par le recaptcha
+    // $response = $_POST['g-recaptcha-response'];
+
+    // // On récupère l'IP de l'utilisateur
+    // $remoteip = $_SERVER['REMOTE_ADDR'];
+
+    // $api_url = "https://www.google.com/recaptcha/api/siteverify?secret=".$secret."&response=".$response."&remoteip=".$remoteip;
 
 
+    // // Interprétation de la réponse
+    // $decode = json_decode(file_get_contents($api_url), true);
 
-?>
+    // if ($decode['success'] == true) 
+    // {
+    //    echo "ok"; 
+    // }
+    // else
+    // {
+    //     echo "vous êtes un robot";
+    // }
+
+    
+
+
+?> -->
 
 
 
