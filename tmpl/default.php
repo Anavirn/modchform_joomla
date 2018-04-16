@@ -96,9 +96,10 @@ if(isset($_POST['send']))
     
     $mailer->setSubject($input_subject);
     $mailer->setBody($body);
-    
+
     // $mailer->addAttachment(JPATH_COMPONENT.'/assets/document.pdf');
     $mailer->isHTML(true);
+    $mailer->Encoding = 'base64';
 
 // Envoi du mail
     $send = $mailer->Send();
@@ -291,19 +292,19 @@ if(isset($_POST['send']))
     </select>
 
 
-    <!-- ! COMMENT REQUIRE UN GROUPE DE CHECKBOXES ! -->
+ 
     <label for="emp"><h3><?php echo $input_emp; ?></h3></label>
-    <input type="checkbox" name="emp1" value="Emploi">Emploi
+    <input type="checkbox" name="emp1" value="Emploi" required >Emploi
     <br>
-    <input type="checkbox" name="emp2" value="Contrat d'apprentissage">Contrat d'apprentissage
+    <input type="checkbox" name="emp2" value="Contrat d'apprentissage" required >Contrat d'apprentissage
     <br>
-    <input type="checkbox" name="emp3" value="Contrat de professionnalisation ">Contrat de professionnalisation (dispositif non applicable)
+    <input type="checkbox" name="emp3" value="Contrat de professionnalisation" required >Contrat de professionnalisation (dispositif non applicable)
     <br>
-    <input type="checkbox" name="emp4" value="Mobilité fonction publique">Mobilité fonction publique (mutation ou détachement)
+    <input type="checkbox" name="emp4" value="Mobilité fonction publique" required >Mobilité fonction publique (mutation ou détachement)
     <br>
-    <input type="checkbox" name="emp5" value="Candidature ciblée sur une offre, préciser le titre de l’offre">Candidature ciblée sur une offre, préciser le titre de l’offre
+    <input type="checkbox" name="emp5" value="Candidature ciblée sur une offre, préciser le titre de l’offre" required >Candidature ciblée sur une offre, préciser le titre de l’offre
     <br>
-    <input type="checkbox" name="emp6" value="Autre">Autre
+    <input type="checkbox" name="emp6" value="Autre" required >Autre
 
     <label for="sal"><h3><?php echo $input_sal; ?></h3></label>
     <input type="text" name="sal" class="form-control" required>
@@ -334,6 +335,7 @@ if(isset($_POST['send']))
 
 <script type="text/javascript">
     jQuery(document).ready(function(){
+
 
 
     //Postal code check
@@ -459,6 +461,23 @@ if(isset($_POST['send']))
 
 
     });
+
+    var $requiredCheckboxes = jQuery(':checkbox[required]');
+
+    $requiredCheckboxes.change(function(){
+
+        if($requiredCheckboxes.is(':checked')) 
+        {
+            $requiredCheckboxes.removeAttr('required');
+        }
+
+        else 
+        {
+            $requiredCheckboxes.attr('required', 'required');
+        }
+
+    });
+
 
 
 
