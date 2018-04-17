@@ -44,75 +44,95 @@ $job_medic        = modchform::getJobsMedic();
 
 <?php
 
+$charcp           = '/^([0-9]{5})$/';
+$charm            = '/^[a-z0-9]+([-_.]?[a-z0-9]+)*@[a-z0-9]+([-_.]?[a-z0-9]+)*\.[a-z]{2,3}$/';
+$chart            = '/^0[1-68]([-/.\s]?[0-9]{2}){4}$/';
+
+
+
 if(isset($_POST['send']))
 {
+    if (preg_match($charcp, $_POST['cp']) && preg_match($charm, $_POST['email']) && preg_match($chart, $_POST['phone']) && preg_match($chart, $_POST['p_phone'])) 
+    {
 
-// Recuperations des inputs
-    $nom                = $_POST['name'];
-    $prenom             = $_POST['forname'];
-    $adresse            = $_POST['adr'];
-    $ville              = $_POST['city'];
-    $code_postal        = $_POST['cp'];
-    $telephone          = $_POST['phone'];
-    $telephone_portable = $_POST['p_phone'];
-    $adresse_mail       = $_POST['email'];
-
-    $job_selected1      = $_POST['job1'];
-    $job_selected2      = $_POST['job2'];
-    $job_selected3      = $_POST['job3'];
-
-    $type_emploi_tab    = array($_POST['emp1'], $_POST['emp2'], $_POST['emp3'], $_POST['emp4'], $_POST['emp5'], $_POST['emp6']);
-
-    $type_emploi        = implode(', ', $type_emploi_tab);
- 
-  
-
-    $pretention_sal     = $_POST['sal'];
-
-    $motivations        = $_POST['motiv'];
-    $commentaires       = $_POST['com'];
-
-
-// Mise en forme du mail
-    $body = "<html><body><h2>Informations personelles</h2><br>Nom : ".$nom."<br>Prénom : ".$prenom."<br>Adresse postale : ".$adresse."<br>Ville : ".$ville."<br>Code postale : ".$code_postal."<br>Téléphone : ".$telephone."<br>Téléphone portable : ".$telephone_portable."<br>E-mail : ".$adresse_mail."<br><br><h2>Informations professionnelles</h2><br>Emploi(s) désiré(s) : ".$job_selected1." , ".$job_selected2." , ".$job_selected3."<br>Type d'emploi : ".$type_emploi."<br>Prétention salariale : ".$pretention_sal."<br>Motivations : ".$motivations."<br>Commentaires : ".$commentaires."</body></html>";
-
-
-// Preparation du mail
-    $mailer = JFactory::getMailer();
-
-    $config = JFactory::getConfig();
-    $sender = array( 
-        $config->get( 'mailfrom' ),
-        $config->get( 'fromname' ) 
-    );
-
-    $mailer->setSender($sender);
-
-    $user = JFactory::getUser();
-   
-
-    $mailer->addRecipient($input_sender);
-
+        
     
-    $mailer->setSubject($input_subject);
-    $mailer->setBody($body);
-
-    // $mailer->addAttachment(JPATH_COMPONENT.'/assets/document.pdf');
-    $mailer->isHTML(true);
-    $mailer->Encoding = 'base64';
-
-// Envoi du mail
-    $send = $mailer->Send();
-    if ( $send !== true ) 
-    {
-        echo 'Erreur : ';
-    }
-    else 
-    {
-        echo 'Votre requête à bien été envoyée';
-    }
 
 
+        // Get inputs
+            $nom                = $_POST['name'];
+            $prenom             = $_POST['forname'];
+            $adresse            = $_POST['adr'];
+            $ville              = $_POST['city'];
+            $code_postal        = $_POST['cp'];
+            $telephone          = $_POST['phone'];
+            $telephone_portable = $_POST['p_phone'];
+            $adresse_mail       = $_POST['email'];
+
+            $job_selected1      = $_POST['job1'];
+            $job_selected2      = $_POST['job2'];
+            $job_selected3      = $_POST['job3'];
+
+            $type_emploi_tab    = array($_POST['emp1'], $_POST['emp2'], $_POST['emp3'], $_POST['emp4'], $_POST['emp5'], $_POST['emp6']);
+
+            $type_emploi        = implode(', ', $type_emploi_tab);
+         
+          
+
+            $pretention_sal     = $_POST['sal'];
+
+            $motivations        = $_POST['motiv'];
+            $commentaires       = $_POST['com'];
+
+
+        // Mail body
+            $body = "<html><body><h2>Informations personelles</h2><br>Nom : ".$nom."<br>Prénom : ".$prenom."<br>Adresse postale : ".$adresse."<br>Ville : ".$ville."<br>Code postale : ".$code_postal."<br>Téléphone : ".$telephone."<br>Téléphone portable : ".$telephone_portable."<br>E-mail : ".$adresse_mail."<br><br><h2>Informations professionnelles</h2><br>Emploi(s) désiré(s) : ".$job_selected1." , ".$job_selected2." , ".$job_selected3."<br>Type d'emploi : ".$type_emploi."<br>Prétention salariale : ".$pretention_sal."<br>Motivations : ".$motivations."<br>Commentaires : ".$commentaires."</body></html>";
+
+
+    // Mail configuration
+            $mailer = JFactory::getMailer();
+
+            $config = JFactory::getConfig();
+            $sender = array( 
+                $config->get( 'mailfrom' ),
+                $config->get( 'fromname' ) 
+            );
+
+            $mailer->setSender($sender);
+
+            // $user = JFactory::getUser();
+           
+
+            $mailer->addRecipient($input_sender);
+
+            
+            $mailer->setSubject($input_subject);
+            $mailer->setBody($body);
+
+            $attachFile = JRequest::getVar( 'cv', '', 'files', 'array' );
+
+
+            $mailer->addAttachment($attachFile);
+            $mailer->isHTML(true);
+            $mailer->Encoding = 'base64';
+
+        // Mail sending
+            $send = $mailer->Send();
+            if ( $send !== true ) 
+            {
+                echo 'Erreur : ';
+            }
+            else 
+            {
+                echo '<h3>Votre requête à bien été envoyée</h3>';
+            }
+
+
+        }
+        else
+        {
+            echo "<h3>Vous n'avez pas bien rempli le formulaire !</h3>";
+        }
 }
 
 
@@ -316,7 +336,7 @@ if(isset($_POST['send']))
     <textarea class="form-control" name="com" required></textarea>
 
     <label for="cv"><h3><?php echo $input_cv; ?></h3></label>
-    <input type="file" name="cv" required>
+    <input type="file" name="cv" id="cv" required>
 
     <label for="lm"><h3><?php echo $input_lm; ?></h3></label>
     <input type="file" name="lm" required>
@@ -337,6 +357,12 @@ if(isset($_POST['send']))
     jQuery(document).ready(function(){
 
 
+        var $verifcp;
+        var $verifmail;
+        var $verifphone;
+        var $verifpphone;
+
+
 
     //Postal code check
     jQuery("input[name='cp']").blur(function()
@@ -347,6 +373,15 @@ if(isset($_POST['send']))
         {
             jQuery(this).css({backgroundColor : "#ffffff"});
             jQuery("small").empty("");
+            $verifcp=0;
+                if ($verifcp == 1 && $verifmail == 1 && $verifphone == 1 && $verifpphone == 1)
+                {
+                    console.log('ok');
+                }
+                else
+                {
+                    console.log('non');
+                }
         }
 
         else
@@ -355,6 +390,21 @@ if(isset($_POST['send']))
             {
                 jQuery(this).css({backgroundColor : "#f8ffd7"});
                 jQuery("small").empty("");
+                $verifcp=1;
+                if ($verifcp == 1 && $verifmail == 1 && $verifphone == 1 && $verifpphone == 1)
+                {
+                    console.log('ok');
+                }
+                else
+                {
+                    console.log('non');
+                }
+              
+                
+           
+               
+              
+              
             }
             else
             {
@@ -362,6 +412,18 @@ if(isset($_POST['send']))
                 jQuery(this).css({backgroundColor : "#ffcccb"});
                 jQuery(this).after("<small class='small_err'>  Veuillez renseigner un code postal valide</small>");
                 jQuery(".small_err").css({color : "red"});
+                $verifcp=0;
+                if ($verifcp == 1 && $verifmail == 1 && $verifphone == 1 && $verifpphone == 1)
+                {
+                    console.log('ok');
+                }
+                else
+                {
+                    console.log('non');
+                }
+                
+                
+              
             } 
         }
 
@@ -371,7 +433,7 @@ if(isset($_POST['send']))
 
 
 
-    //Name check
+    //Email check
     jQuery("input[name='email']").blur(function() 
     {
         var $charm = /^[a-z0-9]+([-_.]?[a-z0-9]+)*@[a-z0-9]+([-_.]?[a-z0-9]+)*\.[a-z]{2,3}$/;
@@ -379,7 +441,16 @@ if(isset($_POST['send']))
         if (jQuery("input[name='email']").val() === "")
         {
             jQuery(this).css({backgroundColor : "#ffffff"});
-            jQuery("small").empty("");
+            jQuery(".small_err").empty("");
+            $verifmail=0;
+                if ($verifcp == 1 && $verifmail == 1 && $verifphone == 1 && $verifpphone == 1)
+                {
+                    console.log('ok');
+                }
+                else
+                {
+                    console.log('non');
+                }
         }
 
         else
@@ -387,14 +458,38 @@ if(isset($_POST['send']))
             if ($charm.test(jQuery(this).val())) 
             {
                 jQuery(this).css({backgroundColor : "#f8ffd7"});
-                jQuery("small").empty("");
+                jQuery(".small_err").empty("");
+                $verifmail=1;
+                if ($verifcp == 1 && $verifmail == 1 && $verifphone == 1 && $verifpphone == 1)
+                {
+                    console.log('ok');
+                }
+                else
+                {
+                    console.log('non');
+                }
+               
+                
+              
+            
             }
             else
             {
-                jQuery("small").empty("");
+                jQuery(".small_err").empty("");
                 jQuery(this).css({backgroundColor : "#ffcccb"});
                 jQuery(this).after("<small class='small_err'>  Veuillez renseigner une addresse mail valide</small>");
                 jQuery(".small_err").css({color : "red"});
+                $verifmail=0;
+                if ($verifcp == 1 && $verifmail == 1 && $verifphone == 1 && $verifpphone == 1)
+                {
+                    console.log('ok');
+                }
+                else
+                {
+                    console.log('non');
+                }
+                
+              
             } 
         }
         
@@ -409,7 +504,16 @@ if(isset($_POST['send']))
         if (jQuery("input[name='phone']").val() === "")
         {
             jQuery(this).css({backgroundColor : "#ffffff"});
-            jQuery("small").empty("");
+            jQuery(".small_err").empty("");
+            $verifphone=0;
+                if ($verifcp == 1 && $verifmail == 1 && $verifphone == 1 && $verifpphone == 1)
+                {
+                    console.log('ok');
+                }
+                else
+                {
+                    console.log('non');
+                }
         }
 
         else
@@ -417,14 +521,38 @@ if(isset($_POST['send']))
             if ($chart.test(jQuery(this).val())) 
             {
                 jQuery(this).css({backgroundColor : "#f8ffd7"});
-                jQuery("small").empty("");
+                jQuery(".small_err").empty("");
+                $verifphone=1;
+                if ($verifcp == 1 && $verifmail == 1 && $verifphone == 1 && $verifpphone == 1)
+                {
+                    console.log('ok');
+                }
+                else
+                {
+                    console.log('non');
+                }
+            
+                
+              
+             
             }
             else
             {
-                jQuery("small").empty("");
+                jQuery(".small_err").empty("");
                 jQuery(this).css({backgroundColor : "#ffcccb"});
                 jQuery(this).after("<small class='small_err'>  Veuillez renseigner un numéro de téléphone valide</small>");
                 jQuery(".small_err").css({color : "red"});
+                $verifphone=0;
+                if ($verifcp == 1 && $verifmail == 1 && $verifphone == 1 && $verifpphone == 1)
+                {
+                    console.log('ok');
+                }
+                else
+                {
+                    console.log('non');
+                }
+                
+         
             } 
         }
 
@@ -439,7 +567,16 @@ if(isset($_POST['send']))
         if (jQuery("input[name='p_phone']").val() === "")
         {
             jQuery(this).css({backgroundColor : "#ffffff"});
-            jQuery("small").empty("");
+            jQuery(".small_err").empty("");
+            $verifpphone=0;
+                if ($verifcp == 1 && $verifmail == 1 && $verifphone == 1 && $verifpphone == 1)
+                {
+                    console.log('ok');
+                }
+                else
+                {
+                    console.log('non');
+                }
         }
 
         else
@@ -447,21 +584,52 @@ if(isset($_POST['send']))
             if ($chartp.test(jQuery(this).val())) 
             {
                 jQuery(this).css({backgroundColor : "#f8ffd7"});
-                jQuery("small").empty("");
+                jQuery(".small_err").empty("");
+                $verifpphone=1;
+                if ($verifcp == 1 && $verifmail == 1 && $verifphone == 1 && $verifpphone == 1)
+                {
+                    console.log('ok');
+                }
+                else
+                {
+                    console.log('non');
+                }
+            
+
+                              
+               
+             
 
             }
             else
             {
-                jQuery("small").empty("");
+                jQuery(".small_err").empty("");
                 jQuery(this).css({backgroundColor : "#ffcccb"});
                 jQuery(this).after("<small class='small_err'>  Veuillez renseigner un numéro de téléphone valide</small>");
                 jQuery(".small_err").css({color : "red"});
+                $verifpphone=0;
+                if ($verifcp == 1 && $verifmail == 1 && $verifphone == 1 && $verifpphone == 1)
+                {
+                    console.log('ok');
+                }
+                else
+                {
+                    console.log('non');
+                }
+              
+                
             } 
         }
 
 
+
+
     });
 
+
+
+
+    // Require group of checkboxes
     var $requiredCheckboxes = jQuery(':checkbox[required]');
 
     $requiredCheckboxes.change(function(){
@@ -477,6 +645,12 @@ if(isset($_POST['send']))
         }
 
     });
+
+    
+       
+
+   
+
 
 
 
