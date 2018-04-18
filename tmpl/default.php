@@ -44,30 +44,26 @@ $job_medic        = modchform::getJobsMedic();
 
 <?php
 
-$charcp           = '/^([0-9]{5})$/';
-$charm            = '/^[a-z0-9]+([-_.]?[a-z0-9]+)*@[a-z0-9]+([-_.]?[a-z0-9]+)*\.[a-z]{2,3}$/';
-$chart            = '/^0[1-68]([-/.\s]?[0-9]{2}){4}$/';
 
 
 
 if(isset($_POST['send']))
 {
-    if (preg_match($charcp, $_POST['cp']) && preg_match($charm, $_POST['email']) && preg_match($chart, $_POST['phone']) && preg_match($chart, $_POST['p_phone'])) 
-    {
+
 
         
     
 
 
         // Get inputs
-            $nom                = $_POST['name'];
-            $prenom             = $_POST['forname'];
-            $adresse            = $_POST['adr'];
-            $ville              = $_POST['city'];
-            $code_postal        = $_POST['cp'];
-            $telephone          = $_POST['phone'];
-            $telephone_portable = $_POST['p_phone'];
-            $adresse_mail       = $_POST['email'];
+            $nom                = htmlspecialchars($_POST['name']);
+            $prenom             = htmlspecialchars($_POST['forname']);
+            $adresse            = htmlspecialchars($_POST['adr']);
+            $ville              = htmlspecialchars($_POST['city']);
+            $code_postal        = htmlspecialchars($_POST['cp']);
+            $telephone          = htmlspecialchars($_POST['phone']);
+            $telephone_portable = htmlspecialchars($_POST['p_phone']);
+            $adresse_mail       = htmlspecialchars($_POST['email']);
 
             $job_selected1      = $_POST['job1'];
             $job_selected2      = $_POST['job2'];
@@ -79,10 +75,10 @@ if(isset($_POST['send']))
          
           
 
-            $pretention_sal     = $_POST['sal'];
+            $pretention_sal     = htmlspecialchars($_POST['sal']);
 
-            $motivations        = $_POST['motiv'];
-            $commentaires       = $_POST['com'];
+            $motivations        = htmlspecialchars($_POST['motiv']);
+            $commentaires       = htmlspecialchars($_POST['com']);
 
 
         // Mail body
@@ -128,11 +124,8 @@ if(isset($_POST['send']))
             }
 
 
-        }
-        else
-        {
-            echo "<h3>Vous n'avez pas bien rempli le formulaire !</h3>";
-        }
+        
+
 }
 
 
@@ -343,11 +336,11 @@ if(isset($_POST['send']))
 
 
     <br>
-    <div class="g-recaptcha" data-sitekey="6LdAclMUAAAAAK5wSSEMcn2pzPwheUUMcM1NYAcX"></div>
+  <!--   <div class="g-recaptcha" data-sitekey="6LdAclMUAAAAAK5wSSEMcn2pzPwheUUMcM1NYAcX"></div> -->
     <br>
 
     
-    <input class='btn btn-primary' type="submit" name="send" value="<?php echo $params->get('message_button'); ?>"/>
+    <input id="sub" class='btn btn-danger' type="submit" name="send" value="<?php echo $params->get('message_button'); ?>"/>
     </fieldset>
 
 
@@ -376,11 +369,14 @@ if(isset($_POST['send']))
             $verifcp=0;
                 if ($verifcp == 1 && $verifmail == 1 && $verifphone == 1 && $verifpphone == 1)
                 {
-                    console.log('ok');
+                    jQuery("#sub").removeClass("btn btn-danger");
+                    jQuery("#sub").addClass("btn btn-success");
                 }
                 else
                 {
-                    console.log('non');
+                    jQuery("#sub").removeClass("btn btn-success");
+                    jQuery("#sub").addClass("btn btn-danger");
+
                 }
         }
 
@@ -393,11 +389,13 @@ if(isset($_POST['send']))
                 $verifcp=1;
                 if ($verifcp == 1 && $verifmail == 1 && $verifphone == 1 && $verifpphone == 1)
                 {
-                    console.log('ok');
+                    jQuery("#sub").removeClass("btn btn-danger");
+                    jQuery("#sub").addClass("btn btn-success");
                 }
                 else
                 {
-                    console.log('non');
+                    jQuery("#sub").removeClass("btn btn-success");
+                    jQuery("#sub").addClass("btn btn-danger");
                 }
               
                 
@@ -415,11 +413,13 @@ if(isset($_POST['send']))
                 $verifcp=0;
                 if ($verifcp == 1 && $verifmail == 1 && $verifphone == 1 && $verifpphone == 1)
                 {
-                    console.log('ok');
+                    jQuery("#sub").removeClass("btn btn-danger");
+                    jQuery("#sub").addClass("btn btn-success");
                 }
                 else
                 {
-                    console.log('non');
+                    jQuery("#sub").removeClass("btn btn-success");
+                    jQuery("#sub").addClass("btn btn-danger");
                 }
                 
                 
@@ -445,11 +445,13 @@ if(isset($_POST['send']))
             $verifmail=0;
                 if ($verifcp == 1 && $verifmail == 1 && $verifphone == 1 && $verifpphone == 1)
                 {
-                    console.log('ok');
+                    jQuery("#sub").removeClass("btn btn-danger");
+                    jQuery("#sub").addClass("btn btn-success");
                 }
                 else
                 {
-                    console.log('non');
+                    jQuery("#sub").removeClass("btn btn-success");
+                    jQuery("#sub").addClass("btn btn-danger");
                 }
         }
 
@@ -462,11 +464,13 @@ if(isset($_POST['send']))
                 $verifmail=1;
                 if ($verifcp == 1 && $verifmail == 1 && $verifphone == 1 && $verifpphone == 1)
                 {
-                    console.log('ok');
+                    jQuery("#sub").removeClass("btn btn-danger");
+                    jQuery("#sub").addClass("btn btn-success");
                 }
                 else
                 {
-                    console.log('non');
+                    jQuery("#sub").removeClass("btn btn-success");
+                    jQuery("#sub").addClass("btn btn-danger");
                 }
                
                 
@@ -482,11 +486,13 @@ if(isset($_POST['send']))
                 $verifmail=0;
                 if ($verifcp == 1 && $verifmail == 1 && $verifphone == 1 && $verifpphone == 1)
                 {
-                    console.log('ok');
+                    jQuery("#sub").removeClass("btn btn-danger");
+                    jQuery("#sub").addClass("btn btn-success");
                 }
                 else
                 {
-                    console.log('non');
+                    jQuery("#sub").removeClass("btn btn-success");
+                    jQuery("#sub").addClass("btn btn-danger");
                 }
                 
               
@@ -508,11 +514,13 @@ if(isset($_POST['send']))
             $verifphone=0;
                 if ($verifcp == 1 && $verifmail == 1 && $verifphone == 1 && $verifpphone == 1)
                 {
-                    console.log('ok');
+                    jQuery("#sub").removeClass("btn btn-danger");
+                    jQuery("#sub").addClass("btn btn-success");
                 }
                 else
                 {
-                    console.log('non');
+                    jQuery("#sub").removeClass("btn btn-success");
+                    jQuery("#sub").addClass("btn btn-danger");
                 }
         }
 
@@ -525,11 +533,13 @@ if(isset($_POST['send']))
                 $verifphone=1;
                 if ($verifcp == 1 && $verifmail == 1 && $verifphone == 1 && $verifpphone == 1)
                 {
-                    console.log('ok');
+                    jQuery("#sub").removeClass("btn btn-danger");
+                    jQuery("#sub").addClass("btn btn-success");
                 }
                 else
                 {
-                    console.log('non');
+                    jQuery("#sub").removeClass("btn btn-success");
+                    jQuery("#sub").addClass("btn btn-danger");
                 }
             
                 
@@ -545,11 +555,13 @@ if(isset($_POST['send']))
                 $verifphone=0;
                 if ($verifcp == 1 && $verifmail == 1 && $verifphone == 1 && $verifpphone == 1)
                 {
-                    console.log('ok');
+                    jQuery("#sub").removeClass("btn btn-danger");
+                    jQuery("#sub").addClass("btn btn-success");
                 }
                 else
                 {
-                    console.log('non');
+                    jQuery("#sub").removeClass("btn btn-success");
+                    jQuery("#sub").addClass("btn btn-danger");
                 }
                 
          
@@ -571,11 +583,13 @@ if(isset($_POST['send']))
             $verifpphone=0;
                 if ($verifcp == 1 && $verifmail == 1 && $verifphone == 1 && $verifpphone == 1)
                 {
-                    console.log('ok');
+                    jQuery("#sub").removeClass("btn btn-danger");
+                    jQuery("#sub").addClass("btn btn-success");
                 }
                 else
                 {
-                    console.log('non');
+                    jQuery("#sub").removeClass("btn btn-success");
+                    jQuery("#sub").addClass("btn btn-danger");
                 }
         }
 
@@ -588,11 +602,13 @@ if(isset($_POST['send']))
                 $verifpphone=1;
                 if ($verifcp == 1 && $verifmail == 1 && $verifphone == 1 && $verifpphone == 1)
                 {
-                    console.log('ok');
+                    jQuery("#sub").removeClass("btn btn-danger");
+                    jQuery("#sub").addClass("btn btn-success");
                 }
                 else
                 {
-                    console.log('non');
+                    jQuery("#sub").removeClass("btn btn-success");
+                    jQuery("#sub").addClass("btn btn-danger");
                 }
             
 
@@ -610,11 +626,13 @@ if(isset($_POST['send']))
                 $verifpphone=0;
                 if ($verifcp == 1 && $verifmail == 1 && $verifphone == 1 && $verifpphone == 1)
                 {
-                    console.log('ok');
+                    jQuery("#sub").removeClass("btn btn-danger");
+                    jQuery("#sub").addClass("btn btn-success");
                 }
                 else
                 {
-                    console.log('non');
+                    jQuery("#sub").removeClass("btn btn-success");
+                    jQuery("#sub").addClass("btn btn-danger");
                 }
               
                 
@@ -648,6 +666,22 @@ if(isset($_POST['send']))
 
     
        
+    jQuery("#sub").click(function(event){
+        if (jQuery(this).hasClass("btn-success")) 
+        {
+            jQuery(".small_err").empty("");
+            console.log("ok");
+        }
+        else
+        {
+            jQuery(".small_err").empty("");
+            event.preventDefault();
+            jQuery(this).after("<small class='small_err'>    Veuillez remplir tout les champs correctement </small>");
+            jQuery(".small_err").css({color : "red"});
+            console.log("non");
+        }
+
+    });
 
    
 
