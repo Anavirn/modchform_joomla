@@ -49,6 +49,13 @@ $job_medic        = modchform::getJobsMedic();
 
 if(isset($_POST['send']))
 {
+    // $taille_max = 500000;
+    // $taille_cv = filesize($_FILES['cv']['tmp_name']);
+    // $taille_lm = filesize($_FILES['lm']['tmp_name']);
+
+    
+        
+    
 
 
         
@@ -105,10 +112,14 @@ if(isset($_POST['send']))
             $mailer->setSubject($input_subject);
             $mailer->setBody($body);
 
-            $attachFile = JRequest::getVar( 'cv', '', 'files', 'array' );
+            $pjloc_cv = $_FILES['cv']['tmp_name'];
+            $pjloc_lm = $_FILES['lm']['tmp_name'];
 
+            $pjname_cv = $_FILES['cv']['name'];
+            $pjname_lm = $_FILES['lm']['name'];
 
-            $mailer->addAttachment($attachFile);
+            $mailer->addAttachment($pjloc_cv, $pjname_cv);
+            $mailer->addAttachment($pjloc_lm, $pjname_lm);
             $mailer->isHTML(true);
             $mailer->Encoding = 'base64';
 
@@ -116,11 +127,11 @@ if(isset($_POST['send']))
             $send = $mailer->Send();
             if ( $send !== true ) 
             {
-                echo 'Erreur : ';
+                echo "Erreur : ";
             }
             else 
             {
-                echo '<h3>Votre requête à bien été envoyée</h3>';
+                echo "<h3 class='text-success'>Votre requête à bien été envoyée</h3>";
             }
 
 
@@ -134,7 +145,7 @@ if(isset($_POST['send']))
 
 
 
- <form method="post" action="">
+ <form method="post" action="" enctype="multipart/form-data">
     <fieldset>
     <legend><h1>Informations personnelles</h1></legend>
 
@@ -329,10 +340,12 @@ if(isset($_POST['send']))
     <textarea class="form-control" name="com" required></textarea>
 
     <label for="cv"><h3><?php echo $input_cv; ?></h3></label>
-    <input type="file" name="cv" id="cv" required>
+    <input type="file" name="cv" id="cv" required accept=".pdf, .jpg, .jpeg">
 
     <label for="lm"><h3><?php echo $input_lm; ?></h3></label>
-    <input type="file" name="lm" required>
+    <input type="file" name="lm" required accept=".pdf, .doc, .docx, .odt">
+
+    <input type="hidden" name="MAX_FILE_SIZE" value="500000">
 
 
     <br>
@@ -665,7 +678,7 @@ if(isset($_POST['send']))
     });
 
     
-       
+    // Final confirmation
     jQuery("#sub").click(function(event){
         if (jQuery(this).hasClass("btn-success")) 
         {
