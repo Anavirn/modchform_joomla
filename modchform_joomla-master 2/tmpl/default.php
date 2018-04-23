@@ -2,32 +2,31 @@
 
 defined('_JEXEC') or die;
 
-JHtml::_('jquery.framework');
 
-JHtml::_('bootstrap.tooltip');
 
-JHtml::stylesheet(JURI::root().'assets/bootstrap/dist/css/bootstrap.min.css');
-JHtml::stylesheet(JURI::root().'assets/bootstrap/dist/js/bootstrap.min.js');
+JHtml::stylesheet(JURI::base(). 'modules/mod_chform/assets/css/style.css');
 
-$input_name       = $params->get('input_name');
-$input_forname    = $params->get('input_forname');
-$input_adr        = $params->get('input_adr');
-$input_city       = $params->get('input_city');
-$input_cp         = $params->get('input_cp');
-$input_phone      = $params->get('input_phone');
-$input_p_phone    = $params->get('input_p_phone');
-$input_email      = $params->get('input_email');
 
-$input_job        = $params->get('input_job');
-$input_emp        = $params->get('input_emp');
-$input_sal        = $params->get('input_sal');
-$input_motiv      = $params->get('input_motiv');
-$input_com        = $params->get('input_com');
-$input_cv         = $params->get('input_cv');
-$input_lm         = $params->get('input_lm');
+$input_name       = $params->get('Champ nom');
+$input_forname    = $params->get('Champ prénom');
+$input_adr        = $params->get('Champ adresse');
+$input_city       = $params->get('Champ ville');
+$input_cp         = $params->get('Champ code postal');
+$input_phone      = $params->get('Champ téléphone');
+$input_p_phone    = $params->get('Champ téléphone portable');
+$input_email      = $params->get('Champ adresse mail');
 
-$input_sender     = $params->get('input_sender');
-$input_subject    = $params->get('input_subject');
+$input_job        = $params->get('Champ emploi');
+$input_emp        = $params->get('Champ type');
+$input_sal        = $params->get('Champ salaire');
+$input_motiv      = $params->get('Champ motivation');
+$input_com        = $params->get('Champ commentaire');
+$input_cv         = $params->get('Champ CV');
+$input_lm         = $params->get('Champ lettre de motivation');
+$input_submit     = $params->get('Bouton');
+
+$input_sender     = $params->get('Destinataire du mail');
+$input_subject    = $params->get('Sujet du mail');
 
 $job_soins        = modchform::getJobsSoins(); 
 $job_social       = modchform::getJobsSocial();
@@ -145,46 +144,76 @@ if(isset($_POST['send']))
 
 
 
+<div class="container">
  <form method="post" action="" enctype="multipart/form-data">
     <fieldset>
-    <legend><h1>Informations personnelles</h1></legend>
+    <legend><h3>Informations personnelles</h3></legend>
 
+        <div class="form-group">
 
+            <div class="form-row">
+                <div class="col-md-6 formdivchr">
+                    <label class="formlabchr" for="name"><b><?php echo $input_name; ?> *</b></label>
+                    <input class="forminputchr" type="text" name="name" required />
+                </div>
+                <div class="col-md-6 formdivchr">
+                    <label class="formlabchr" for="forname"><b><?php echo $input_forname; ?> *</b></label>
+                    <input class="forminputchr" type="text" name="forname" required />
+                </div>
+
+            </div>
+        
       
    
-        <label for="name"><h3><?php echo $input_name; ?></h3></label>
-        <input class="form-control" type="text" name="name" required />
+
  
-        <label for="forname"><h3><?php echo $input_forname; ?></h3></label>
-        <input class="form-control" type="text" name="forname" required />
-    
-        <label for="adr"><h3><?php echo $input_adr; ?></h3></label>
-        <input class="form-control" type="text" name="adr" required />
+       <div class="form-row">
+           <div class="col-md-4 formdivchr">
+                <label class="formlabchr" for="adr"><b><?php echo $input_adr; ?> *</b></label>
+                <input class="forminputchr" type="text" name="adr" required />
+           </div>
+           <div class="col-md-4 formdivchr">
+                <label class="formlabchr" for="city"><b><?php echo $input_city; ?> *</b></label>
+                <input class="forminputchr" type="text" name="city" required />
+           </div>
+           <div class="col-md-4 formdivchr">
+                <label class="formlabchr" for="cp"><b><?php echo $input_cp; ?> *</b></label>
+                <input class="forminputchr" type="text" name="cp" required />
+           </div>
 
-        <label for="city"><h3><?php echo $input_city; ?></h3></label>
-        <input class="form-control" type="text" name="city" required />
+       </div>
 
-        <label for="cp"><h3><?php echo $input_cp; ?></h3></label>
-        <input class="form-control" type="text" name="cp" required />
+       <div class="form-row">
+           <div class="col-md-4 formdivchr">
+                <label class="formlabchr" for="phone"><b><?php echo $input_phone; ?> </b></label>
+                <input class="forminputchr" type="text" name="phone" />
+           </div>
+           <div class="col-md-4 formdivchr">
+                <label class="formlabchr" for="p_phone"><b><?php echo $input_p_phone; ?> *</b></label>
+                <input class="forminputchr" type="text" name="p_phone" required/>
+           </div>
+           <div class="col-md-4 formdivchr">
+                <label class="formlabchr" for="email"><b><?php echo $input_email; ?> *</b></label>
+                <input class="forminputchr" type="text" name="email" required/>
+           </div>
+       </div>
 
-        <label for="phone"><h3><?php echo $input_phone; ?></h3></label>
-        <input class="form-control" type="text" name="phone" />
 
-        <label for="p_phone"><h3><?php echo $input_p_phone; ?></h3></label>
-        <input class="form-control" type="text" name="p_phone" required/>
-
-        <label for="email"><h3><?php echo $input_email; ?></h3></label>
-        <input class="form-control" type="text" name="email" required/>
-
-
+       </div>
 
     </fieldset>
 
     <fieldset>
-        <legend><h1>Informations professionnelles</h1></legend>
+        <legend><h3>Informations professionnelles</h3></legend>
 
-    <label for="job"><h3><?php echo $input_job; ?></h3></label>
-    <select name="job1" required>
+    <div class="form-group">
+
+    <label class="formlabchr" for="job"><b><?php echo $input_job; ?></b></label>
+
+    <div class="form-row">
+        <div class="col-md-4 formdivchr">
+
+    <select name="job1" required class="forminputchr"> 
 
     	<option selected disabled>...</option>
 
@@ -226,13 +255,13 @@ if(isset($_POST['send']))
      
     </select>
 
+</div>
 
 
 
+<div class="col-md-4 formdivchr">
 
-
-
-    <select name="job2">
+    <select name="job2" class="forminputchr">
         <option selected value="">...</option>
 
         <option disabled>- SOINS -</option>
@@ -273,7 +302,9 @@ if(isset($_POST['send']))
 
     	 
     </select>
-    <select name="job3">
+</div>
+<div class="col-md-4 formdivchr">
+    <select name="job3" class="forminputchr">
         <option selected value="">...</option>
 
         <option disabled>- SOINS -</option>
@@ -314,50 +345,60 @@ if(isset($_POST['send']))
 
     	 
     </select>
+</div>
+</div>
+
+    <div class="formdivchr">
+        <label class="formlabchr" for="emp"><b><?php echo $input_emp; ?></b></label>
+        <input class="formcheckchr" type="checkbox" name="emp1" value="Emploi" required >Emploi
+        <br>
+        <input class="formcheckchr" type="checkbox" name="emp2" value="Contrat d'apprentissage" required >Contrat d'apprentissage
+        <br>
+        <input class="formcheckchr" type="checkbox" name="emp3" value="Contrat de professionnalisation" required >Contrat de professionnalisation (dispositif non applicable)
+        <br>
+        <input class="formcheckchr" type="checkbox" name="emp4" value="Mobilité fonction publique" required >Mobilité fonction publique (mutation ou détachement)
+        <br>
+        <input class="formcheckchr" type="checkbox" name="emp5" value="Candidature ciblée sur une offre, préciser le titre de l’offre" required >Candidature ciblée sur une offre, préciser le titre de l’offre
+        <br>
+        <input class="formcheckchr" type="checkbox" name="emp6" value="Autre" required >Autre
+    </div>
+
+    <div class="formdivchr">
+        <label class="formlabchr" for="sal"><b><?php echo $input_sal; ?></b></label>
+        <input type="text" name="sal" class="form-control" required>
+    </div>
 
 
- 
-    <label for="emp"><h3><?php echo $input_emp; ?></h3></label>
-    <input type="checkbox" name="emp1" value="Emploi" required >Emploi
-    <br>
-    <input type="checkbox" name="emp2" value="Contrat d'apprentissage" required >Contrat d'apprentissage
-    <br>
-    <input type="checkbox" name="emp3" value="Contrat de professionnalisation" required >Contrat de professionnalisation (dispositif non applicable)
-    <br>
-    <input type="checkbox" name="emp4" value="Mobilité fonction publique" required >Mobilité fonction publique (mutation ou détachement)
-    <br>
-    <input type="checkbox" name="emp5" value="Candidature ciblée sur une offre, préciser le titre de l’offre" required >Candidature ciblée sur une offre, préciser le titre de l’offre
-    <br>
-    <input type="checkbox" name="emp6" value="Autre" required >Autre
+    <div class="formdivchr">
+        <label class="formlabchr" for="motiv"><b><?php echo $input_motiv; ?></b></label>
+        <textarea class="formareachr" name="motiv" required></textarea>
 
-    <label for="sal"><h3><?php echo $input_sal; ?></h3></label>
-    <input type="text" name="sal" class="form-control" required>
+        <label class="formlabchr" for="com"><b><?php echo $input_com; ?></b></label>
+        <textarea class="formareachr" name="com" required></textarea>
+    </div>
+
+    <label class="formlabchr" for="cv"><b><?php echo $input_cv; ?></b></label>
+    <input class="formfilechr" type="file" name="cv" id="cv" required accept=".pdf, .jpg, .jpeg">
+
+    <label class="formlabchr" for="lm"><b><?php echo $input_lm; ?></b></label>
+    <input class="formfilechr" type="file" name="lm" required accept=".pdf, .doc, .docx, .odt">
+
+    <input type="hidden" name="MAX_FILE_SIZE" value="9000000">
+
+
     
-    <label for="motiv"><h3><?php echo $input_motiv; ?></h3></label>
-    <textarea class="form-control" name="motiv" required></textarea>
-
-    <label for="com"><h3><?php echo $input_com; ?></h3></label>
-    <textarea class="form-control" name="com" required></textarea>
-
-    <label for="cv"><h3><?php echo $input_cv; ?></h3></label>
-    <input type="file" name="cv" id="cv" required accept=".pdf, .jpg, .jpeg">
-
-    <label for="lm"><h3><?php echo $input_lm; ?></h3></label>
-    <input type="file" name="lm" required accept=".pdf, .doc, .docx, .odt">
-
-    <input type="hidden" name="MAX_FILE_SIZE" value="500000">
-
-
-    <br>
-  <!--   <div class="g-recaptcha" data-sitekey="6LdAclMUAAAAAK5wSSEMcn2pzPwheUUMcM1NYAcX"></div> -->
-    <br>
+    <div class="g-recaptcha formdivchr" data-sitekey="6LdAclMUAAAAAK5wSSEMcn2pzPwheUUMcM1NYAcX"></div>
+    
 
     
-    <input id="sub" class='btn btn-danger' type="submit" name="send" value="<?php echo $params->get('message_button'); ?>"/>
+    <input id="sub" class='btn btn-danger' type="submit" name="send" value="<?php echo $input_submit ?>"/>
+
+    </div>
     </fieldset>
 
 
 </form>
+</div>
 
 <script type="text/javascript">
     jQuery(document).ready(function(){
@@ -367,6 +408,76 @@ if(isset($_POST['send']))
         var $verifmail;
         var $verifphone;
         var $verifpphone;
+
+
+ jQuery("input[name='name']").blur(function()
+    {
+
+        if (jQuery("input[name='name']").val() != "")
+        {
+            jQuery(this).css({backgroundColor : "#f8ffd7"});
+        }
+        else
+        {
+            jQuery(this).css({backgroundColor : "#ffffff"}); 
+        }
+
+    });
+
+ jQuery("input[name='forname']").blur(function()
+    {
+
+        if (jQuery("input[name='forname']").val() != "")
+        {
+            jQuery(this).css({backgroundColor : "#f8ffd7"});
+        }
+        else
+        {
+            jQuery(this).css({backgroundColor : "#ffffff"}); 
+        }
+    });
+
+ jQuery("input[name='adr']").blur(function()
+    {
+
+        if (jQuery("input[name='adr']").val() != "")
+        {
+            jQuery(this).css({backgroundColor : "#f8ffd7"});
+        }
+        else
+        {
+            jQuery(this).css({backgroundColor : "#ffffff"}); 
+        }
+    });
+
+ jQuery("input[name='city']").blur(function()
+    {
+
+        if (jQuery("input[name='city']").val() != "")
+        {
+            jQuery(this).css({backgroundColor : "#f8ffd7"});
+        }
+        else
+        {
+            jQuery(this).css({backgroundColor : "#ffffff"}); 
+        }
+    });
+
+ jQuery("input[name='sal']").blur(function()
+    {
+
+        if (jQuery("input[name='sal']").val() != "")
+        {
+            jQuery(this).css({backgroundColor : "#f8ffd7"});
+        }
+        else
+        {
+            jQuery(this).css({backgroundColor : "#ffffff"}); 
+        }
+    });
+
+
+
 
 
 

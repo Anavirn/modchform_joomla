@@ -16,6 +16,7 @@
 	<filename>mod_chform.php</filename>
 	<filename>mod_chform.xml</filename>
     <filename>helper.php</filename>
+    <folder>assets</folder>
 	<folder>tmpl</folder>
     </files>
 
@@ -24,24 +25,24 @@
 
     	<fields name="params">
     		<fieldset name="basic">
-    			<field name="input_name" type="text" translate_default="true" size="10" />
-    			<field name="input_forname" type="text" translate_default="true" size="10" />
-    			<field name="input_adr" type="text" translate_default="true" size="10" />
-    			<field name="input_city" type="text" translate_default="true" size="10" />
-    			<field name="input_cp" type="text" translate_default="true" size="10" />
-    			<field name="input_phone" type="text" translate_default="true" size="10" />
-    			<field name="input_p_phone" type="text" translate_default="true" size="10" />
-    			<field name="input_email" type="text" translate_default="true" size="10" />
-    			<field name="input_job" type="text" translate_default="true" size="10" />
-    			<field name="input_emp" type="text" translate_default="true" size="10" />
-                <field name="input_sal" type="text" translate_default="true" size="10" />
-    			<field name="input_motiv" type="text" translate_default="true" size="10" />
-    			<field name="input_com" type="text" translate_default="true" size="10" />
-                <field name="input_cv" type="text" translate_default="true" size="10" />
-                <field name="input_lm" type="text" translate_default="true" size="10" />
-                <field name="input_sender" type="text" translate_default="true" size="10" />
-                <field name="input_subject" type="text" translate_default="true" size="10" />
-    			<field name="message_button" type="text" translate_default="true" size="10" />
+    			<field name="Champ nom" type="text" translate_default="true" size="10" />
+    			<field name="Champ prénom" type="text" translate_default="true" size="10" />
+    			<field name="Champ adresse" type="text" translate_default="true" size="10" />
+    			<field name="Champ ville" type="text" translate_default="true" size="10" />
+    			<field name="Champ code postal" type="text" translate_default="true" size="10" />
+    			<field name="Champ téléphone" type="text" translate_default="true" size="10" />
+    			<field name="Champ téléphone portable" type="text" translate_default="true" size="10" />
+    			<field name="Champ adresse mail" type="text" translate_default="true" size="10" />
+    			<field name="Champ emploi" type="text" translate_default="true" size="10" />
+    			<field name="Champ type" type="text" translate_default="true" size="10" />
+                <field name="Champ salaire" type="text" translate_default="true" size="10" />
+    			<field name="Champ motivation" type="text" translate_default="true" size="10" />
+    			<field name="Champ commentaire" type="text" translate_default="true" size="10" />
+                <field name="Champ CV" type="text" translate_default="true" size="10" />
+                <field name="Champ lettre de motivation" type="text" translate_default="true" size="10" />
+                <field name="Destinataire du mail" type="text" translate_default="true" size="10" />
+                <field name="Sujet du mail" type="text" translate_default="true" size="10" />
+    			<field name="Bouton" type="text" translate_default="true" size="10" />
 
     		</fieldset>
     	</fields>

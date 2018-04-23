@@ -1,0 +1,26 @@
+.forminputchr{
+	width: 100%;
+	
+
+}
+
+.formdivchr{
+	margin: 15px 0 15px 0;
+}
+
+.formcheckchr{
+	vertical-align: none !important;
+	margin: 0 7px !important;
+}
+
+.formlabchr{
+	font-size: 15px;
+}
+
+.formareachr{
+	width: 80%;
+}
+
+.formfilechr{
+	line-height: 0px !important;
+}
