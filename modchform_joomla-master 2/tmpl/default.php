@@ -146,18 +146,18 @@ if(isset($_POST['send']))
 
 <div class="container">
  <form method="post" action="" enctype="multipart/form-data">
-    <fieldset>
-    <legend><h3>Informations personnelles</h3></legend>
+    <fieldset class="formfieldchr">
+    <legend class="formlegchr"><b class="formtitlechr">Informations personnelles</b></legend>
 
         <div class="form-group">
 
             <div class="form-row">
                 <div class="col-md-6 formdivchr">
-                    <label class="formlabchr" for="name"><b><?php echo $input_name; ?> *</b></label>
+                    <label class="formlabchr" for="name"><b><?php echo $input_name; ?><span class="formstarchr"> *</span></b></label>
                     <input class="forminputchr" type="text" name="name" required />
                 </div>
                 <div class="col-md-6 formdivchr">
-                    <label class="formlabchr" for="forname"><b><?php echo $input_forname; ?> *</b></label>
+                    <label class="formlabchr" for="forname"><b><?php echo $input_forname; ?><span class="formstarchr"> *</span></b></label>
                     <input class="forminputchr" type="text" name="forname" required />
                 </div>
 
@@ -167,48 +167,50 @@ if(isset($_POST['send']))
    
 
  
-       <div class="form-row">
-           <div class="col-md-4 formdivchr">
-                <label class="formlabchr" for="adr"><b><?php echo $input_adr; ?> *</b></label>
-                <input class="forminputchr" type="text" name="adr" required />
-           </div>
-           <div class="col-md-4 formdivchr">
-                <label class="formlabchr" for="city"><b><?php echo $input_city; ?> *</b></label>
-                <input class="forminputchr" type="text" name="city" required />
-           </div>
-           <div class="col-md-4 formdivchr">
-                <label class="formlabchr" for="cp"><b><?php echo $input_cp; ?> *</b></label>
-                <input class="forminputchr" type="text" name="cp" required />
+           <div class="form-row">
+               <div class="col-md-4 formdivchr">
+                    <label class="formlabchr" for="adr"><b><?php echo $input_adr; ?><span class="formstarchr"> *</span></b></label>
+                    <input class="forminputchr" type="text" name="adr" required />
+               </div>
+               <div class="col-md-4 formdivchr">
+                    <label class="formlabchr" for="city"><b><?php echo $input_city; ?><span class="formstarchr"> *</span></b></label>
+                    <input class="forminputchr" type="text" name="city" required />
+               </div>
+               <div class="col-md-4 formdivchr">
+                    <label class="formlabchr" for="cp"><b><?php echo $input_cp; ?><span class="formstarchr"> *</span></b></label>
+                    <input class="forminputchr" type="text" name="cp" required />
+               </div>
+
            </div>
 
-       </div>
-
-       <div class="form-row">
-           <div class="col-md-4 formdivchr">
-                <label class="formlabchr" for="phone"><b><?php echo $input_phone; ?> </b></label>
-                <input class="forminputchr" type="text" name="phone" />
+           <div class="form-row">
+               <div class="col-md-4 formdivchr">
+                    <label class="formlabchr" for="phone"><b><?php echo $input_phone; ?> </b></label>
+                    <input class="forminputchr" type="text" name="phone" />
+               </div>
+               <div class="col-md-4 formdivchr">
+                    <label class="formlabchr" for="p_phone"><b><?php echo $input_p_phone; ?><span class="formstarchr"> *</span></b></label>
+                    <input class="forminputchr" type="text" name="p_phone" required/>
+               </div>
+               <div class="col-md-4 formdivchr">
+                    <label class="formlabchr" for="email"><b><?php echo $input_email; ?><span class="formstarchr"> *</span></b></label>
+                    <input class="forminputchr" type="text" name="email" required/>
+               </div>
            </div>
-           <div class="col-md-4 formdivchr">
-                <label class="formlabchr" for="p_phone"><b><?php echo $input_p_phone; ?> *</b></label>
-                <input class="forminputchr" type="text" name="p_phone" required/>
-           </div>
-           <div class="col-md-4 formdivchr">
-                <label class="formlabchr" for="email"><b><?php echo $input_email; ?> *</b></label>
-                <input class="forminputchr" type="text" name="email" required/>
-           </div>
-       </div>
 
 
        </div>
 
     </fieldset>
 
-    <fieldset>
-        <legend><h3>Informations professionnelles</h3></legend>
+
+
+    <fieldset class="formfieldchr">
+        <legend class="formlegchr"><b class="formtitlechr">Informations professionnelles</b></legend>
 
     <div class="form-group">
 
-    <label class="formlabchr" for="job"><b><?php echo $input_job; ?></b></label>
+    <label class="formlabchr" for="job"><b><?php echo $input_job; ?><span class="formstarchr"> *</span></b></label>
 
     <div class="form-row">
         <div class="col-md-4 formdivchr">
@@ -349,7 +351,7 @@ if(isset($_POST['send']))
 </div>
 
     <div class="formdivchr">
-        <label class="formlabchr" for="emp"><b><?php echo $input_emp; ?></b></label>
+        <label class="formlabchr" for="emp"><b><?php echo $input_emp; ?><span class="formstarchr"> *</span></b></label>
         <input class="formcheckchr" type="checkbox" name="emp1" value="Emploi" required >Emploi
         <br>
         <input class="formcheckchr" type="checkbox" name="emp2" value="Contrat d'apprentissage" required >Contrat d'apprentissage
@@ -364,23 +366,23 @@ if(isset($_POST['send']))
     </div>
 
     <div class="formdivchr">
-        <label class="formlabchr" for="sal"><b><?php echo $input_sal; ?></b></label>
+        <label class="formlabchr" for="sal"><b><?php echo $input_sal; ?><span class="formstarchr"> *</span></b></label>
         <input type="text" name="sal" class="form-control" required>
     </div>
 
 
     <div class="formdivchr">
-        <label class="formlabchr" for="motiv"><b><?php echo $input_motiv; ?></b></label>
+        <label class="formlabchr" for="motiv"><b><?php echo $input_motiv; ?><span class="formstarchr"> *</span></b></label>
         <textarea class="formareachr" name="motiv" required></textarea>
 
-        <label class="formlabchr" for="com"><b><?php echo $input_com; ?></b></label>
+        <label class="formlabchr" for="com"><b><?php echo $input_com; ?><span class="formstarchr"> *</span></b></label>
         <textarea class="formareachr" name="com" required></textarea>
     </div>
 
-    <label class="formlabchr" for="cv"><b><?php echo $input_cv; ?></b></label>
+    <label class="formlabchr" for="cv"><b><?php echo $input_cv; ?><span class="formstarchr"> *</span></b></label>
     <input class="formfilechr" type="file" name="cv" id="cv" required accept=".pdf, .jpg, .jpeg">
 
-    <label class="formlabchr" for="lm"><b><?php echo $input_lm; ?></b></label>
+    <label class="formlabchr" for="lm"><b><?php echo $input_lm; ?><span class="formstarchr"> *</span></b></label>
     <input class="formfilechr" type="file" name="lm" required accept=".pdf, .doc, .docx, .odt">
 
     <input type="hidden" name="MAX_FILE_SIZE" value="9000000">

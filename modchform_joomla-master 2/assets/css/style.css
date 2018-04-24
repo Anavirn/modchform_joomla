@@ -1,7 +1,7 @@
+
 .forminputchr{
 	width: 100%;
 	
-
 }
 
 .formdivchr{
@@ -24,3 +24,23 @@
 .formfilechr{
 	line-height: 0px !important;
 }
+
+.formtitlechr{
+	color: #a70303 !important;
+	font-size: 18px !important;	
+}
+
+.formstarchr{
+	color: #a70303;
+}
+
+.formlegchr{
+	width: auto !important;
+
+}
+
+.formfieldchr{
+	margin: 0 0 20px 0 !important;
+}
+
+
